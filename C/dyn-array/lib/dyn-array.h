@@ -2,12 +2,9 @@
 #define __DYN_ARRAY_H__
 
 #include <stdlib.h>
+#include "data.h"
 
 #define CAPACITY_INIT 100
-
-typedef struct {
-  int key;
-} Data;
 
 typedef struct {
   unsigned int size;
