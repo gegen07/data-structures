@@ -1,9 +1,10 @@
 #include "dyn-array.h"
 
-void dynArrayInit(DynArray *arr) {
+void dynArrayInit(DynArray *arr, void (*freeObject)(void *)) {
   arr->size = 0;
   arr->capacity = CAPACITY_INIT;
   arr->data = (Data*) malloc(arr->capacity * sizeof(Data));
+  arr->freeObject = freeObject;
 }
 
 void doubleCapacity(DynArray *arr) {
@@ -28,11 +29,23 @@ void setElement(DynArray *arr, int index, Data *data) {
 
   arr->data[index] = *data;
 }
-void dynArrayAppend(DynArray *arr, Data *data) {
+void dynArrayAppend(DynArray *arr, Data data) {
   doubleCapacity(arr);
-  arr->data[arr->size++] = *data;
+  arr->data[arr->size++] = data;
 }
 
 void dynArrayFree(DynArray *arr) {
+  int i;
   free(arr->data);
+}
+
+char *toString(DynArray *arr) {
+  char *print = (char*) malloc(sizeof(arr->data) + STRING_MAX);
+
+  int i;
+  for (i = 0; i < arr->size; i++) {
+    strcat(print, arr->data[i].toString(getKey(&arr->data[i])));
+  }
+
+  return print;
 }
