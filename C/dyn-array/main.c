@@ -7,7 +7,7 @@ typedef struct {
 
 char *toStringIntStruct(void *data) {
   intStruct dataS = *(intStruct*) data; 
-  char *print = (char*) malloc(sizeof(int) + STRING_MAX);
+  char *print = (char*) malloc(sizeof(intStruct) + STRING_MAX);
   char buffer[BUFFER_SIZE];
   
   sprintf(buffer, "%d", dataS.key);
@@ -33,26 +33,26 @@ int main() {
 
   int i;
   for (i = 200; i > -50; i--) {
-    dataInt.key = 1;
-    setData(&data, &dataInt);
+    dataInt.key = i;
+    setData(&data, &dataInt, sizeof(intStruct));
 
     dynArrayAppend(&dynArray, data);
   }
 
-  puts(toString(&dynArray));
-
   printf("Heres the value at index 27 before CreateDataFunction:\n");
   data = getElement(&dynArray, 27);
 
-  puts(data.toString(getKey(&data))); 
+  puts(data.toString(getKey(&data)));
 
   dataInt.key = 27;
-  setData(&data, &dataInt);
+  setData(&data, &dataInt, sizeof(intStruct));
   setElement(&dynArray, 27, &data);
 
   printf("Heres the value at index 27 after Setfunction:\n");
   data = getElement(&dynArray, 27);
   puts(data.toString(getKey(&data))); 
+  
+  puts(toString(&dynArray));
   
   dynArrayFree(&dynArray);
 

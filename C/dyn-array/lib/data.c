@@ -6,8 +6,9 @@ void createData(Data *data) {
   data->toString = NULL;
 }
 
-void setData(Data *data, void *key) {
-  data->key = key;
+void setData(Data *data, void *key, size_t n) {
+  data->key = malloc(n);
+  memcpy(data->key, key, n); 
 }
 
 void setToStringFunction(Data *data, char* (*toString)(void *)) {
