@@ -3,6 +3,8 @@
 
 #include "Data.h"
 
+#include <stdio.h>
+
 typedef struct linkedList_t * LinkedList;
 typedef unsigned int uint;
 
@@ -14,6 +16,11 @@ struct linkedList_t {
 
 int linkedListInit(LinkedList *llist, uint itemSize);
 int linkedListInsertAt(LinkedList *llist, uint index, Item value);
-int 
+int linkedListRemoveAt(LinkedList *llist, uint index, Item value);
+int linkedListAt(LinkedList *llist, uint index, Item value);
+uint linkedListSize(LinkedList *llist);
+uint linkedListItemSize(LinkedList *llist);
+int linkedListClear(LinkedList *llist);
+int linkedListFree(LinkedList *llist);
 
 #endif

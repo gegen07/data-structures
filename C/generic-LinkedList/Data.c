@@ -9,8 +9,12 @@ static int DataCreate(Data *data, Item value, uint itemLength) {
 }
 
 static int DataFree(Data *data) {
+  if((*data) == NULL) {
+    return 0;
+  }
   free((*data)->data);
-  (*data)->next = NULL;
+  free((*data));
+  *data = NULL;
   return 0;
 }
 

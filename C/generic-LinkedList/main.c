@@ -1,32 +1,31 @@
 #include <stdio.h>
 #include "LinkedList.h"
 
-typedef struct {
-  int a;
-  char b;
-} Peso;
-
 int main() {
 
-  uint s = sizeof(Peso);
+  int data;
+  int reader = 0;
   int i;
-  int pos;
-
-  Peso p;
 
   LinkedList l;
-  linkedListInit(&l, s);
+  linkedListInit(&l, sizeof(int));
 
-  for(i=0; i < 20; i++) {
-    p.a = 10 * (i+1);
-    p.b = 'a' + i;
-
-    pos = linkedListInsertAt(&l, i, &p);
-    printf("%d, ", pos);
+  for(i=0; i<10; i++) {
+    data = 2*i;
+    linkedListInsertAt(&l, i, &data);
   }
 
-  printf("\ndone\n");
+  linkedListFree(&l);
 
+  //reader = linkedListSize(&l);
+
+  //printf("%d\n", reader);
+
+  if(l == NULL) {
+    printf("null\n");
+  } else {
+    printf("empty\n");
+  }
 
   return 0;
 }
