@@ -9,4 +9,4 @@ Make sure that you have cmake tools installed in your environment:
 If you don't have cmake installed, read this guide: [CMAKE](https://cmake.org/install/). 
 
 ## Instructions for Executing
-- ```./DYN-ARRAY```
+- ```./DYN-ARRAY```x
