@@ -6,11 +6,22 @@
 #include <stdlib.h>
 
 typedef struct node_t *Node;
+typedef struct node_queue_t *Node_queue;
 struct node_t {
   Data data;
   struct node_t *left;
   struct node_t *right;
 };
+
+struct node_queue_t {
+  struct node_t *key;
+  struct node_queue_t *next;
+};
+
+typedef struct {
+  struct node_queue_t* front;
+  struct node_queue_t* rear; 
+} Queue;
 
 typedef struct {
   Node head;
@@ -20,8 +31,14 @@ typedef enum {pre_order, post_order, in_order} Order_print_t;
 
 int node_init(Node *node, Data *data);
 
+int queue_init(Queue *queue);
+int enqueue(Queue *queue, Node_queue node);
+Data* dequeue(Queue *queue);
+int queue_empty(Queue *queue);
+
 int bst_init(bs_tree_t *tree);
 int bst_insert(Node *node, Node *node_insert, int (*compare_data)(void*, void*));
 int bst_print(bs_tree_t *tree, Order_print_t order_print);
 int bst_height(Node *node);
+Node bst_search(Node *node, Data key, int (*compare_data)(void*, void*)); 
 #endif

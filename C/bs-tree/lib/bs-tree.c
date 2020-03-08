@@ -35,6 +35,44 @@ int node_init(Node *node, Data *data) {
   return 0;
 }
 
+int queue_init(Queue *queue) {
+  queue->front = NULL;
+  queue->rear = NULL;
+
+  return 0;
+}
+
+int queue_empty(Queue *queue) {
+  return (queue->front == queue->rear) ? 0 : 1;
+}
+
+int enqueue(Queue *queue, Node_queue node) {
+  if(!queue_empty(queue)) {
+    queue->front = queue->rear = node;
+    return 0;
+  }
+
+  queue->rear->next = node;
+  queue->rear = node;
+  
+  return 0;
+}
+
+Data* dequeue(Queue *queue) {
+  if (queue->front == NULL) {
+    return NULL;
+  }
+
+  Node_queue node_queue = queue->front;
+  queue->front = queue->front->next;
+
+  if (queue->front == NULL) {
+    queue->rear = NULL;
+  }
+
+  return &(node_queue->key->data);
+}
+
 int bst_init(bs_tree_t *tree) {
   tree->head = NULL;
   return 0;
@@ -101,7 +139,7 @@ Node bst_search(Node *node, Data key, int (*compare_data)(void*, void*)) {
   } else if (comparator < 0) {
     return bst_search(&((*node)->left), key, compare_data);
   } else {
-    return node;
+    return *node;
   }
   
   return NULL;
