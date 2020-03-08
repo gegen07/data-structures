@@ -74,3 +74,38 @@ int bst_print(bs_tree_t *tree, Order_print_t order_print) {
   }
   return 0;
 }
+
+int bst_height(Node *node) {
+  if ((*node) == NULL) {
+    return -1;
+  } else {
+    int h_left = bst_height(&((*node)->left));
+    int h_right = bst_height(&((*node)->right));
+    if(h_left < h_right) {
+      return h_right;
+    } else {
+      return h_left;
+    }
+  }
+}
+
+Node bst_search(Node *node, Data key, int (*compare_data)(void*, void*)) {
+  if((*node) == NULL) {
+    return NULL;
+  } 
+  
+  int comparator = (*compare_data)(getKey(&((*node)->data)), getKey(&key));
+
+  if(comparator > 0) {
+    return bst_search(&((*node)->right), key, compare_data);
+  } else if (comparator < 0) {
+    return bst_search(&((*node)->left), key, compare_data);
+  } else {
+    return node;
+  }
+  
+  return NULL;
+}
+
+
+
