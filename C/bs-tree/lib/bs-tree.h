@@ -30,15 +30,17 @@ typedef struct {
 typedef enum {pre_order, post_order, in_order} Order_print_t;
 
 int node_init(Node *node, Data *data);
+int node_queue_init(Node_queue *node_queue, Node *node_tree); 
 
 int queue_init(Queue *queue);
-int enqueue(Queue *queue, Node_queue node);
-Data* dequeue(Queue *queue);
+int enqueue(Queue *queue, Node_queue *node);
+Node dequeue(Queue *queue);
 int queue_empty(Queue *queue);
 
 int bst_init(bs_tree_t *tree);
 int bst_insert(Node *node, Node *node_insert, int (*compare_data)(void*, void*));
 int bst_print(bs_tree_t *tree, Order_print_t order_print);
 int bst_height(Node *node);
-Node bst_search(Node *node, Data key, int (*compare_data)(void*, void*)); 
+Node bst_search(Node *node, Data key, int (*compare_data)(void*, void*));
+void bst_bfs(Node *node);
 #endif
