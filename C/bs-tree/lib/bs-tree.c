@@ -44,19 +44,20 @@ int node_queue_init(Node_queue *node_queue, Node *node_tree) {
 }
 
 int queue_init(Queue *queue) {
-  queue->front = (Node_queue) malloc (sizeof(struct node_queue_t));
-  queue->rear = (Node_queue) malloc (sizeof(struct node_queue_t));
-
+  queue->front = NULL;
+  queue->rear = NULL;
   return 0;
 }
 
 int queue_empty(Queue *queue) {
-  return (queue->front == queue->rear) ? 0 : 1;
+  return (queue->rear == NULL) ? 0 : 1;
 }
 
 int enqueue(Queue *queue, Node_queue *node) {
-  if(!queue_empty(queue)) {
-    queue->front = queue->rear = (*node);
+
+  if(queue_empty(queue)==0) {
+    queue->front = (*node); 
+    queue->rear = (*node);
     return 0;
   }
 
@@ -71,14 +72,14 @@ Node dequeue(Queue *queue) {
     return NULL;
   }
 
-  Node_queue node_queue = queue->front;
+  Node node = queue->front->key;
   queue->front = queue->front->next;
 
   if (queue->front == NULL) {
     queue->rear = NULL;
   }
 
-  return (node_queue->key);
+  return node;
 }
 
 int bst_init(bs_tree_t *tree) {
@@ -156,24 +157,26 @@ Node bst_search(Node *node, Data key, int (*compare_data)(void*, void*)) {
 void bst_bfs(Node *node) {
   Queue queue;
   queue_init(&queue);
-
-  Node aux_node = *node;
+  Node aux_node = (*node);
 
   while (aux_node != NULL) {
-    Data *key = &((*node)->data);
+    Data *key = &(aux_node->data);
     printf("%s", key->toString(getKey(key)));
    
-    if (aux_node->left != NULL) {
+    if ((aux_node->left) != NULL) {
       Node_queue node_queue;
-      node_queue_init(&node_queue, &(aux_node->left));
+      node_queue_init(&node_queue, &(aux_node->left)); 
       enqueue(&queue, &node_queue);
-    } else {
+    } 
+
+    if((aux_node->right) != NULL)  {
       Node_queue node_queue;
       node_queue_init(&node_queue, &(aux_node->right));
       enqueue(&queue, &node_queue);
     }
 
     aux_node = dequeue(&queue);
+    
   }
 }
 
