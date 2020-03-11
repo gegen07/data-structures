@@ -44,7 +44,7 @@ int main() {
   int op = 1;
 
   do {
-    printf("(1)Inserir na árvore\n(2)Imprimir Ordem\n(3)Imprimir Pre Ordem\n(4)Imprimir Pos Ordem\n(5)Imprimir em Largura\n(0)Sair\n" );
+    printf("(1)Inserir na árvore\n(2)Imprimir Ordem\n(3)Imprimir Pre Ordem\n(4)Imprimir Pos Ordem\n(5)Imprimir em Largura\n(6)Retirar da Árvore\n(0)Sair\n" );
     scanf("%d", &op);
 
     switch(op) {
@@ -68,8 +68,16 @@ int main() {
         bst_print(&bst, 1);
         printf("\n");
         break;
-
       case 5:
+        bst_bfs(&(bst.head));
+        printf("\n");
+        break;
+      case 6:
+        printf("Digite o numero que queira retirar: ");
+        scanf("%d", &number.key);
+        setData(&data, &number, sizeof(Int));
+
+        bst_remove(&(bst.head), &data, __compare_int);
         bst_bfs(&(bst.head));
         printf("\n");
         break;

@@ -105,6 +105,64 @@ int bst_insert(Node *node, Node *node_insert, int (*compare_data)(void*, void*))
   return 0;
 }
 
+void bst_predecessor(Node q, Node *r) {
+  Node aux;
+  
+  if ((*r)->right != NULL) {
+    bst_predecessor(q, &((*r)->right));
+    return;
+  }
+
+  q->data = (*r)->data;
+  aux = *r;
+  *r = (*r)->left;
+
+  free(aux);
+}
+
+Node* bst_search(Node *node, Data key, int (*compare_data)(void*, void*)) {
+  if((*node) == NULL) {
+    return NULL;
+  } 
+  
+  int comparator = (*compare_data)(getKey(&key), getKey(&((*node)->data)));
+
+  if(comparator > 0) {
+    return bst_search(&((*node)->right), key, compare_data);
+  } else if (comparator < 0) {
+    return bst_search(&((*node)->left), key, compare_data);
+  } else {
+    return node;
+  }
+  
+  return NULL;
+}
+
+int bst_remove(Node *node, Data *key, int(*compare_data)(void*, void*)) {
+  if ((*node) == NULL) return -2; // empty tree
+
+  Node* node_searched = bst_search(node, *key, compare_data);
+  if ((*node_searched) != NULL) {
+    if ((*node_searched)->left == NULL && (*node_searched)->right == NULL) {
+      Node aux = *node_searched;
+      (*node_searched) = (*node_searched)->right;
+      free(aux);
+    } else if ((*node_searched)->left == NULL && (*node_searched)->right != NULL) {
+      (*node_searched) = (*node_searched)->right;
+      free((*node_searched)->right);
+    } else if ((*node_searched)->right == NULL && (*node_searched)->left != NULL) {
+      (*node_searched) = (*node_searched)->left;
+      free((*node_searched)->left);
+    } else if ((*node_searched)->left != NULL && (*node_searched)->right != NULL) {
+      bst_predecessor((*node_searched), &((*node_searched)->left));
+    }
+  } else {
+    return -1; // not_found
+  }
+
+  return 0;
+}
+
 int bst_print(bs_tree_t *tree, Order_print_t order_print) {
   switch (order_print) {
     case pre_order:
@@ -134,24 +192,6 @@ int bst_height(Node *node) {
       return h_left;
     }
   }
-}
-
-Node bst_search(Node *node, Data key, int (*compare_data)(void*, void*)) {
-  if((*node) == NULL) {
-    return NULL;
-  } 
-  
-  int comparator = (*compare_data)(getKey(&((*node)->data)), getKey(&key));
-
-  if(comparator > 0) {
-    return bst_search(&((*node)->right), key, compare_data);
-  } else if (comparator < 0) {
-    return bst_search(&((*node)->left), key, compare_data);
-  } else {
-    return *node;
-  }
-  
-  return NULL;
 }
 
 void bst_bfs(Node *node) {

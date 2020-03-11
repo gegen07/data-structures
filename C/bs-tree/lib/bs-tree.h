@@ -39,8 +39,10 @@ int queue_empty(Queue *queue);
 
 int bst_init(bs_tree_t *tree);
 int bst_insert(Node *node, Node *node_insert, int (*compare_data)(void*, void*));
+void bst_predecessor(Node q, Node *r);
+Node* bst_search(Node *node, Data key, int (*compare_data)(void*, void*));
+int bst_remove(Node *node, Data *key, int (*compare_data)(void*, void*));
 int bst_print(bs_tree_t *tree, Order_print_t order_print);
 int bst_height(Node *node);
-Node bst_search(Node *node, Data key, int (*compare_data)(void*, void*));
 void bst_bfs(Node *node);
 #endif
