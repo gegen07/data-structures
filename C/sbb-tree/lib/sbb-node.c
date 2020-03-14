@@ -1,18 +1,5 @@
 #include "sbb-node.h"
 
-void sbbNodeAlloc(SBBNode *root) {
-  (*root) = (SBBNode) malloc(sizeof( struct sbb_node_t ));
-}
-
-void sbbNodeInit(SBBNode *root, Item value, uint itemSize) {
-  (*root)->left = NULL;
-  (*root)->right = NULL;
-  (*root)->dirLeft = Vertical;
-  (*root)->dirRight = Vertical;
-  (*root)->value = (Item) malloc(itemSize);
-  memcpy((*root)->value, value, itemSize);
-}
-
 static void sbbNodeInsertLL(SBBNode *root) {
   SBBNode middle = (*root)->left;
   (*root)->left = middle->right;
@@ -66,8 +53,7 @@ static void sbbNodeInsertInternal(SBBNode *root,
                                   Direction *dirDad,
                                   short *flagEnd) {
   if(*root == NULL) {
-    sbbNodeAlloc(root);
-    sbbNodeInit(root, value, itemSize);
+    sbbNodeAlloc(root, value, itemSize);
     *dirDad = Horizontal;
     return;
   } 
@@ -106,11 +92,36 @@ static void sbbNodeInsertInternal(SBBNode *root,
   }
 }
 
+
+
+
+
+
+
+void sbbNodeAlloc(SBBNode *root, Item value, uint itemSize) {
+  (*root) = (SBBNode) malloc(sizeof( struct sbb_node_t ));
+  (*root)->left = NULL;
+  (*root)->right = NULL;
+  (*root)->dirLeft = Vertical;
+  (*root)->dirRight = Vertical;
+  (*root)->value = (Item) malloc(itemSize);
+  memcpy((*root)->value, value, itemSize);
+}
+
+void sbbNodeInit(SBBNode *root) {
+  *root = NULL;
+}
+
 void sbbNodeInsert(SBBNode *root, Item value, uint itemSize, int (*itemGetKey)(Item item)) {
   short end = FALSE; 
   Direction dir = Horizontal;
   sbbNodeInsertInternal(root, value, itemSize, itemGetKey, &dir, &end);
 }
+
+
+
+
+
 
 
 void sbbNodeSetValue(SBBNode *root, Item value, uint itemSize) {

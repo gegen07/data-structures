@@ -11,4 +11,7 @@ struct sbb_tree_t {
   int (*itemGetKey)(Item item);
 };
 
+void sbbTreeInit(SBBTree *tree, uint itemSize, int (*itemGetKey)(Item item));
+void sbbTreeInsert(SBBTree *tree, Item value);
+
 #endif

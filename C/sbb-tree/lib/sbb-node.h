@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// #include <stdio.h>
-
 #define FALSE 0
 #define TRUE 1
 
@@ -24,9 +22,8 @@ struct sbb_node_t {
   Direction dirLeft, dirRight;
 };
 
-void sbbNodeAlloc(SBBNode *root);
-void sbbNodeInit(SBBNode *root, Item value, uint itemSize);
-
+void sbbNodeAlloc(SBBNode *root, Item value, uint itemSize);
+void sbbNodeInit(SBBNode *root);
 void sbbNodeInsert(SBBNode *root, Item value, uint itemSize, int (*itemGetKey)(Item item));
 
 void sbbNodeSetValue(SBBNode *root, Item value, uint itemSize);

@@ -1,31 +1,40 @@
 #include <stdio.h>
 #include "lib/sbb-tree.h"
 
-int getKey(Item val) {
+typedef struct {
   int key;
-  memcpy(&key, val, sizeof(int));
-  return key;
+  /* DATA */
+} Data;
+
+int dataGetKey(Item val) {
+  Data d;
+  memcpy(&d, val, sizeof(Data));
+  return d.key;
 }
+
+
 
 int main() {
 
+  Data d;
 
-  SBBNode t = NULL;
+  SBBTree tree;
+  sbbTreeInit(&tree, sizeof(Data), dataGetKey);
 
-  int num = 16;
-  sbbNodeInsert(&t, &num, sizeof(int), getKey);
-  num = 8;
-  sbbNodeInsert(&t, &num, sizeof(int), getKey);
-  num = 24;
-  sbbNodeInsert(&t, &num, sizeof(int), getKey);
-  num = 4;
-  sbbNodeInsert(&t, &num, sizeof(int), getKey);
-  num = 12;
-  sbbNodeInsert(&t, &num, sizeof(int), getKey);
-  num = 18;
-  sbbNodeInsert(&t, &num, sizeof(int), getKey);
+  d.key = 10;
+  sbbTreeInsert(&tree, &d);
 
-  printf("%d, %d, %d", getKey(t->value), t->dirLeft, t->dirRight);
+  d.key = 15;
+  sbbTreeInsert(&tree, &d);
+
+  d.key = 5;
+  sbbTreeInsert(&tree, &d);
+
+  d.key = 20;
+  sbbTreeInsert(&tree, &d);
+
+  d.key = 13;
+  sbbTreeInsert(&tree, &d);
 
   return 0;
 }
