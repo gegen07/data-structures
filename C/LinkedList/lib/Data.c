@@ -18,11 +18,6 @@ static int DataFree(Data *data) {
   return 0;
 }
 
-static int DataValueCopy(Item *dest, Item orig, uint itemLength) {
-  memcpy(*dest, orig, itemLength);
-  return 0;
-}
-
 int DataInit(Data *data) {
   *data = NULL;
 }
@@ -74,6 +69,6 @@ int DataAt(Data *data, uint index, Item value, uint itemLength) {
     }
     iterator = iterator->next;
   }
-  DataValueCopy(&value, iterator->data, itemLength);
+  memcpy(value, iterator->data, itemLength);
   return 0;
 }

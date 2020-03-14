@@ -15,7 +15,7 @@ struct data_t {
 };
 
 int DataInit(Data *data);
-int DataInsertAt(Data *data, uint index, void *value, uint itemLength);
+int DataInsertAt(Data *data, uint index, Item value, uint itemLength);
 int DataRemoveAt(Data *data, uint index);
 int DataAt(Data *data, uint index, Item value, uint itemLength);
 
