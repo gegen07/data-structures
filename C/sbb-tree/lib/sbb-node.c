@@ -104,6 +104,7 @@ void sbbNodeAlloc(SBBNode *root, Item value, uint itemSize) {
   (*root)->right = NULL;
   (*root)->dirLeft = Vertical;
   (*root)->dirRight = Vertical;
+  
   (*root)->value = (Item) malloc(itemSize);
   memcpy((*root)->value, value, itemSize);
 }
@@ -124,22 +125,22 @@ void sbbNodeInsert(SBBNode *root, Item value, uint itemSize, int (*itemGetKey)(I
 
 
 
-void sbbNodeSetValue(SBBNode *root, Item value, uint itemSize) {
-  memcpy((*root)->value, value, itemSize);
-}
+// void sbbNodeSetValue(SBBNode *root, Item value, uint itemSize) {
+//   memcpy((*root)->value, value, itemSize);
+// }
 
-void sbbNodeSetLeft(SBBNode *root, SBBNode left) {
-  (*root)->left = left; 
-}
+// void sbbNodeSetLeft(SBBNode *root, SBBNode left) {
+//   (*root)->left = left; 
+// }
 
-void sbbNodeSetRight(SBBNode *root, SBBNode right) {
-  (*root)->right = right;
-}
+// void sbbNodeSetRight(SBBNode *root, SBBNode right) {
+//   (*root)->right = right;
+// }
 
-void sbbNodeSetDirLeft(SBBNode *root, Direction left) {
-  (*root)->dirLeft = left;
-}
+// void sbbNodeSetDirLeft(SBBNode *root, Direction left) {
+//   (*root)->dirLeft = left;
+// }
 
-void sbbNodeSetDirRight(SBBNode *root, Direction right) {
-  (*root)->dirRight = right;
-}
+// void sbbNodeSetDirRight(SBBNode *root, Direction right) {
+//   (*root)->dirRight = right;
+// }

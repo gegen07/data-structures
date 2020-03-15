@@ -26,10 +26,10 @@ void sbbNodeAlloc(SBBNode *root, Item value, uint itemSize);
 void sbbNodeInit(SBBNode *root);
 void sbbNodeInsert(SBBNode *root, Item value, uint itemSize, int (*itemGetKey)(Item item));
 
-void sbbNodeSetValue(SBBNode *root, Item value, uint itemSize);
-void sbbNodeSetLeft(SBBNode *root, SBBNode left);
-void sbbNodeSetRight(SBBNode *root, SBBNode right);
-void sbbNodeSetDirLeft(SBBNode *root, Direction left);
-void sbbNodeSetDirRight(SBBNode *root, Direction right);
+// void sbbNodeSetValue(SBBNode *root, Item value, uint itemSize);
+// void sbbNodeSetLeft(SBBNode *root, SBBNode left);
+// void sbbNodeSetRight(SBBNode *root, SBBNode right);
+// void sbbNodeSetDirLeft(SBBNode *root, Direction left);
+// void sbbNodeSetDirRight(SBBNode *root, Direction right);
 
 #endif
