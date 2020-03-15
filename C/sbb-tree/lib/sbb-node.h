@@ -25,6 +25,9 @@ struct sbb_node_t {
 void sbbNodeAlloc(SBBNode *root, Item value, uint itemSize);
 void sbbNodeInit(SBBNode *root);
 void sbbNodeInsert(SBBNode *root, Item value, uint itemSize, int (*itemGetKey)(Item item));
+void sbbNodeOrder(SBBNode *root, int (*func)(Item item));
+void sbbNodePreOrder(SBBNode *root, int (*func)(Item item));
+void sbbNodePostOrder(SBBNode *root, int (*func)(Item item));
 
 // void sbbNodeSetValue(SBBNode *root, Item value, uint itemSize);
 // void sbbNodeSetLeft(SBBNode *root, SBBNode left);

@@ -119,8 +119,29 @@ void sbbNodeInsert(SBBNode *root, Item value, uint itemSize, int (*itemGetKey)(I
   sbbNodeInsertInternal(root, value, itemSize, itemGetKey, &dir, &end);
 }
 
+void sbbNodeOrder(SBBNode *root, int (*func)(Item item)) {
+  if(*root == NULL) return;
 
+  sbbNodePrint(&(*root)->left, func);
+  func((*root)->value);
+  sbbNodePrint(&(*root)->right, func);
+}
 
+void sbbNodePreOrder(SBBNode *root, int (*func)(Item item)) {
+  if(*root == NULL) return;
+
+  func((*root)->value);
+  sbbNodePrint(&(*root)->left, func);
+  sbbNodePrint(&(*root)->right, func);
+}
+
+void sbbNodePostOrder(SBBNode *root, int (*func)(Item item)) {
+  if(*root == NULL) return;
+
+  sbbNodePrint(&(*root)->left, func);
+  sbbNodePrint(&(*root)->right, func);
+  func((*root)->value);
+}
 
 
 
