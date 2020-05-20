@@ -1,40 +1,27 @@
 #include <stdio.h>
-#include "lib/sbb-tree.h"
-
-typedef struct {
-  int key;
-  /* DATA */
-} Data;
-
-int dataGetKey(Item val) {
-  Data d;
-  memcpy(&d, val, sizeof(Data));
-  return d.key;
-}
-
-
+#include "src/sbb-tree.h"
+#include "src/data.h"
 
 int main() {
 
-  Data d;
-
   SBBTree tree;
-  sbbTreeInit(&tree, sizeof(Data), dataGetKey);
+  sbbTreeInit(&tree, sizeof(Data), dataCompare);
 
-  d.key = 10;
+  Data d;
+  dataInit(&d, "dener");
   sbbTreeInsert(&tree, &d);
 
-  d.key = 15;
-  sbbTreeInsert(&tree, &d);
+  Data i;
+  dataInit(&i, "is");
+  sbbTreeInsert(&tree, &i);
 
-  d.key = 5;
-  sbbTreeInsert(&tree, &d);
+  Data p;
+  dataInit(&p, "prety");
+  sbbTreeInsert(&tree, &p);
 
-  d.key = 20;
-  sbbTreeInsert(&tree, &d);
-
-  d.key = 13;
-  sbbTreeInsert(&tree, &d);
+  Data s;
+  dataInit(&s, "smart");
+  sbbTreeInsert(&tree, &s);
 
   return 0;
 }
